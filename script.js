@@ -22,3 +22,12 @@ async function fetchWeather () {
     console.log(data);
 }
 fetchWeather();
+
+function handleInput () {
+    cityInput = search.value;
+}
+function handleSearch () {
+    fetchWeather();
+}
+search.addEventListener('input', handleInput);
+button.addEventListener('.click', handleSearch);
