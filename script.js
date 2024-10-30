@@ -14,7 +14,20 @@ const humidity = document.querySelector('.humidity');
 const wind = document.querySelector('.wind');
 
 
-let cityInput = 'Los Angeles'
+let cityInput = 'Los Angeles';
+
+function dayOfTheWeek (day, month, year) {
+    const weekday = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
+    ]
+    return weekday[new Date(`${day}/${month}/${year}`).getDay()]
+}
 
 function fetchWeather () {
     fetch(`http://api.weatherapi.com/v1/current.json?key=2dff0dc594da402c997192633242706&q=${cityInput}`)
@@ -30,6 +43,9 @@ function fetchWeather () {
         const month = parseInt(date.substr(5, 2));
         const day = parseInt(date.substr(8, 2));
         const time = date.substr(11);
+
+        
+
     })
 }
 fetchWeather();
