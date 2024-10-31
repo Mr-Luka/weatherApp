@@ -49,7 +49,10 @@ function fetchWeather () {
         cityName.innerHTML = data.location.name;
 
         const iconId = data.current.condition.icon.slice("//cdn.weatherapi.com/weather/64x64/".length);
-        weatherIcon.src = `https://cdn.weatherapi.com/weather/64x64/${iconId}`;
+
+        weatherIcon.src = "./icons/" + iconId ;
+
+
 
     })
 }
