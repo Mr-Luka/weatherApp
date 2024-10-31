@@ -1,17 +1,17 @@
-const weatherBackground = document.querySelector('.weather-app');
-const temp = document.querySelector('.temp');
-const cityName = document.querySelector('.name');
-const time = document.querySelector('.time');
-const date = document.querySelector('.date');
-const weatherIcon = document.querySelector('.icon img');
-const weatherCondition = document.querySelector('.condition');
-const form = document.querySelector('#locationInput');
-const search = document.querySelector('.search'); 
-const button = document.querySelector('.submit');
-const cities = document.querySelector('.city');
-const cloudy = document.querySelector('.cloud');
-const humidity = document.querySelector('.humidity');
-const wind = document.querySelector('.wind');
+const app = document.querySelector(".weather-app");
+const temp = document.querySelector(".temp");
+const cityName = document.querySelector(".name");
+const time = document.querySelector(".time");
+const date = document.querySelector(".date");
+const weatherIcon = document.querySelector(".icon");
+const weatherCondition = document.querySelector(".condition");
+const form = document.querySelector("#locationInput");
+const search = document.querySelector(".search");
+const btn = document.querySelector(".submit");
+const cities = document.querySelectorAll(".city");
+const cloudy = document.querySelector(".cloud");
+const humidity = document.querySelector(".humidity");
+const wind = document.querySelector(".wind");
 
 
 let cityInput = 'Los Angeles';
@@ -38,13 +38,18 @@ function fetchWeather () {
         temp.innerHTML = data.current.temp_f;
         weatherCondition.innerHTML = data.current.condition.text;
 
-        const date = data.location.localtime;
-        const year = parseInt(date.substr(0, 4))
-        const month = parseInt(date.substr(5, 2));
-        const day = parseInt(date.substr(8, 2));
-        const time = date.substr(11);
+        const localDate = data.location.localtime;
+        const year = parseInt(localDate.slice(0, 4));
+        const month = parseInt(localDate.slice(5, 2));
+        const day = parseInt(localDate.slice(8, 2));
+        const timeValue = localDate.slice(11);
 
-        
+        date.innerHTML = `${dayOfTheWeek(day, month, year)}`;
+        time.innerHTML = timeValue;
+        cityName.innerHTML = data.location.name;
+
+        const iconId = data.current.condition.icon.slice("//cdn.weatherapi.com/weather/64x64/".length);
+        weatherIcon.src = `https://cdn.weatherapi.com/weather/64x64/${iconId}`;
 
     })
 }
