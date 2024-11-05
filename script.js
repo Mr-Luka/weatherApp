@@ -13,7 +13,7 @@ const cloudy = document.querySelector(".cloud");
 const humidity = document.querySelector(".humidity");
 const wind = document.querySelector(".wind");
 
-let cityInput = 'Belgrade'
+let cityInput = 'Los Angeles'
 
 
 function dayOfTheWeek (month, day, year) {
@@ -53,7 +53,9 @@ function fetchWeather () {
             "//cdn.weatherapi.com/weather/64x64/".length
         );
         weatherIcon.src = "./icons/" + iconId;
-        console.log(iconId)
+        cloudy.innerHTML = data.current.cloud + '%';
+        humidity.innerHTML = data.current.humidity + '%';
+        wind.innerHTML = data.current.wind_mph + ' mph';
 
 
 
