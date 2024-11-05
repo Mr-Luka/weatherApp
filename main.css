@@ -54,6 +54,8 @@ h1, h3 {
     align-items: center;
 }
 
+
+
 .city-time,
 .temp,
 .weather {
@@ -82,7 +84,7 @@ h1, h3 {
     height: 100%;
     top: 0;
     right: 0;
-    background: rgba(110, 110, 110, 0.25);
+    background: rgba(110, 110, 110, 0.188);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -90,6 +92,7 @@ h1, h3 {
     z-index: 1;
     padding: 3em 2em;
     overflow-Y: scroll;
+    animation: fadeLeft 1300ms ease-in-out forwards;
 }
 
 .panel form {
@@ -159,6 +162,29 @@ h1, h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+
+@keyframes fadeLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(120px)
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+@keyframes fadeLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(120px)
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0)
+    }
 }
 
 @media screen and (max-width: 800px) {
