@@ -16,6 +16,19 @@ const wind = document.querySelector(".wind");
 let cityInput = 'Los Angeles'
 
 
+function dayOfTheWeek(month, day, year) {
+    const weekday = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ];
+    return weekday[new Date(`${month}/${day}/${year}`).getDay()]
+}
+
 function fetchWeather () {
     fetch(`http://api.weatherapi.com/v1/current.json?key=2dff0dc594da402c997192633242706&q=${cityInput}`)
     .then(response => response.json()) 
@@ -24,6 +37,13 @@ function fetchWeather () {
 
         temp.innerHTML = data.current.temp_f;
         cityName.innerHTML = data.location.name;
+
+        const date = data.location.localtime;
+        const year = parseInt(date.slice(0, 4));
+        const month = parseInt(date.slice(5, 7));
+        const day = parseInt(date.slice(8, 10));
+        const time = date.slice(11)
+
         
 
 
