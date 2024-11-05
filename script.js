@@ -15,6 +15,14 @@ const wind = document.querySelector(".wind");
 
 let cityInput = 'Los Angeles'
 
+cities.forEach(city => {
+    city.addEventListener('click', ()=> {
+        cityInput = e.target.innerHTML;
+        fetchWeather();
+        app.style.opacity = "0";
+    })
+})
+
 form.addEventListener('submit', e => {
     if (search.value.length == 0) {
         alert('Please enter a city name');
