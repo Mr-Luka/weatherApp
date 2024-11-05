@@ -16,15 +16,15 @@ const wind = document.querySelector(".wind");
 let cityInput = 'Los Angeles'
 
 form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (search.ariaValueMax.length === 0) {
+    if (search.value.length == 0) {
         alert('Please enter a city name');
     } else {
-        cityInput = e.target.innerHTML;
+        cityInput = search.value;
         fetchWeather();
         search.value = "";
         app.style.opacity = "0";
     }
+        e.preventDefault();
 })
 
 function dayOfTheWeek (month, day, year) {
