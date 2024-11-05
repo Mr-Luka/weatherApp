@@ -13,21 +13,8 @@ const cloudy = document.querySelector(".cloud");
 const humidity = document.querySelector(".humidity");
 const wind = document.querySelector(".wind");
 
+let cityInput = 'Los Angeles'
 
-let cityInput = 'Los Angeles';
-
-function dayOfTheWeek (day, month, year) {
-    const weekday = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
-    ]
-    return weekday[new Date(`${day}/${month}/${year}`).getDay()]
-}
 
 function fetchWeather () {
     fetch(`http://api.weatherapi.com/v1/current.json?key=2dff0dc594da402c997192633242706&q=${cityInput}`)
@@ -36,27 +23,15 @@ function fetchWeather () {
         console.log(data)
 
         temp.innerHTML = data.current.temp_f;
-        weatherCondition.innerHTML = data.current.condition.text;
-
-        const localDate = data.location.localtime;
-        const year = parseInt(localDate.slice(0, 4));
-        const month = parseInt(localDate.slice(5, 2));
-        const day = parseInt(localDate.slice(8, 2));
-        const timeValue = localDate.slice(11);
-
-        date.innerHTML = `${dayOfTheWeek(day, month, year)}`;
-        time.innerHTML = timeValue;
         cityName.innerHTML = data.location.name;
-
-        const iconId = data.current.condition.icon.slice("//cdn.weatherapi.com/weather/64x64/".length);
-
-        weatherIcon.src = "./icons/" + iconId ;
+        
 
 
 
     })
 }
 fetchWeather();
+
 
 
 
