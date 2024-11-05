@@ -16,7 +16,7 @@ const wind = document.querySelector(".wind");
 let cityInput = 'Los Angeles'
 
 cities.forEach(city => {
-    city.addEventListener('click', ()=> {
+    city.addEventListener('click', (e)=> {
         cityInput = e.target.innerHTML;
         fetchWeather();
         app.style.opacity = "0";
@@ -76,12 +76,82 @@ function fetchWeather () {
         humidity.innerHTML = data.current.humidity + '%';
         wind.innerHTML = data.current.wind_mph + ' mph';
 
+        let timeOfDay = "day";
+        const code = data.current.condition.code;
 
+        if (!data.current.is_day) {
+            timeOfDay = 'night';
+        }
 
+        if (code == 1000) {
+            // Clear sky
+            app.style.backgroundImage = `url(./imgs/${timeOfDay}/clear.jpg)`;
+            btn.style.background = "#e5ba92";
+            if(timeOfDay === "night") {
+                btn.style.background = "#181e27";
+            }
+            //cloudy
+        } else if (
+            code == 1003 ||
+            code == 1006 ||
+            code == 1009 ||
+            code == 1030 ||
+            code == 1069 ||
+            code == 1087 ||
+            code == 1135 ||
+            code == 1273 ||
+            code == 1276 ||
+            code == 1279 ||
+            code == 1282
+            ) {
+                app.style.backgroundImage = `url(./imgs/${timeOfDay}/cloudy.jpg)`;
+                btn.style.background = "#fa6d1b";
+                if (timeOfDay === "night") {
+                    btn.style.background = "#181e27";
+                }
+            } // rain
+            else if (
+                code == 1063 ||
+                code == 1069 ||
+                code == 1072 ||
+                code == 1150 ||
+                code == 1153 ||
+                code == 1180 ||
+                code == 1183 ||
+                code == 1186 ||
+                code == 1189 ||
+                code == 1192 ||
+                code == 1195 ||
+                code == 1204 ||
+                code == 1207 ||
+                code == 1240 ||
+                code == 1243 ||
+                code == 1246 ||
+                code == 1249 ||
+                code == 1252
+            )  {
+                app.style.backgroundImage = `url(./imgs/${timeOfDay}/rain.jpg)`;
+                btn.style.background = "#647d75";
+                if (timeOfDay === "night") {
+                    btn.style.background = "#325c80";
+                }
+            } // snow
+            else {
+                app.style.backgroundImage = `url(./imgs/${timeOfDay}/snow.jpg)`;
+                btn.style.background = "#4d72aa";
+                if (timeOfDay === "night") {
+                    btn.style.background = "#1b1b1b";
+            }
+        }
+        app.style.opacity = "1"
+    })
+    .catch(()=> {
+        alert("City not found, please try again");
+        app.style.opacity = "1";
     })
 }
 fetchWeather();
-
+app.style.opacity = "1"
 
 
 
