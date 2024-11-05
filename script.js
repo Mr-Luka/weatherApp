@@ -2,7 +2,7 @@ const app = document.querySelector(".weather-app");
 const temp = document.querySelector(".temp");
 const cityName = document.querySelector(".name");
 const time = document.querySelector(".time");
-const date = document.querySelector(".date");
+const dateNow = document.querySelector(".date");
 const weatherIcon = document.querySelector(".icon");
 const weatherCondition = document.querySelector(".condition");
 const form = document.querySelector("#locationInput");
@@ -13,10 +13,10 @@ const cloudy = document.querySelector(".cloud");
 const humidity = document.querySelector(".humidity");
 const wind = document.querySelector(".wind");
 
-let cityInput = 'Los Angeles'
+let cityInput = 'Belgrade'
 
 
-function dayOfTheWeek(month, day, year) {
+function dayOfTheWeek (month, day, year) {
     const weekday = [
         "Sunday",
         "Monday",
@@ -37,14 +37,23 @@ function fetchWeather () {
 
         temp.innerHTML = data.current.temp_f;
         cityName.innerHTML = data.location.name;
+        weatherCondition.innerHTML = data.current.condition.text;
 
         const date = data.location.localtime;
         const year = parseInt(date.slice(0, 4));
         const month = parseInt(date.slice(5, 7));
         const day = parseInt(date.slice(8, 10));
-        const time = date.slice(11)
+        const timeThere = date.slice(11)
+        console.log(month, day, year)
 
+        time.innerHTML = timeThere;
+        dateNow.innerHTML = `${dayOfTheWeek(month, day, year)}`;
         
+        const iconId = data.current.condition.icon.slice(
+            "//cdn.weatherapi.com/weather/64x64/".length
+        );
+        weatherIcon.src = "./icons/" + iconId;
+        console.log(iconId)
 
 
 
